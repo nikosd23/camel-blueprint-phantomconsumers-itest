@@ -75,7 +75,7 @@
 		<property name="sessionCacheSize" value="100" />
 	</bean>
 	
-	<osgi:service id="connectionFactoryService" ref="connectionFactory" interface="javax.jms.ConnectionFactory"/>
+	<osgi:service id="connectionFactoryService" ref="cachingConnectionFactory" interface="javax.jms.ConnectionFactory"/>
 
 
 </beans>
