@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="camel-route-feature-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+
+	<repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
+    <repository>mvn:org.apache.activemq/activemq-karaf/${activemq.version}/xml/features</repository>
+
+    <feature name='phantom-consumers' description='Feature for Camel Blueprint Route - Phantom Consumers' version='${project.version}' resolver='(obr)'>
+        <feature version='${camel.version}'>camel</feature>
+        <feature version='${camel.version}'>camel-spring</feature>
+        <feature version='${camel.version}'>camel-blueprint</feature>
+        <feature version='${camel.version}'>camel-jms</feature>
+        <feature version='${activemq.version}'>activemq</feature>
+        <feature version='${activemq.version}'>activemq-spring</feature>
+        <bundle>mvn:org.apache.activemq/activemq-camel/${activemq.version}</bundle>
+        <bundle>mvn:org.apache.activemq/activemq-web/${activemq.version}</bundle>
+        <bundle start="true">mvn:org.apache.camel.itests/camel-blueprint-route/${project.version}</bundle>
+        <bundle start="true">mvn:org.apache.camel.itests/broker/${project.version}</bundle>
+        <bundle start="true">mvn:org.apache.camel.itests/queue-commands/${project.version}</bundle>
+    </feature>
+
+</features>
+

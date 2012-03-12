@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:camel="http://camel.apache.org/schema/blueprint"
+           xsi:schemaLocation="
+           http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+           http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+   
+	<!-- Camel Context -->
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint" id="camel-ctx-test" useBlueprintPropertyResolver="true" >
+					  
+    	<routeBuilder id="route.test1" ref="testRouteBuilder"/>  
+    	
+        <route id="route.test2">
+        	<from uri="activemq:queue:test1?concurrentConsumers=5" />
+			<inOnly uri="activemq:queue:test2" />
+		</route>
+		
+    </camelContext>
+    
+    <!-- ActiveMQ Configuration -->
+    <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="connectionFactory" ref="cachingConnectionFactory" />
+		<property name="transacted" value="false" />
+		<property name="maxConcurrentConsumers" value="10" />
+	</bean>
+	
+	<!-- Caching Connection Factory Service -->
+	<reference id="cachingConnectionFactory" interface="javax.jms.ConnectionFactory" availability="mandatory"/>
+	
+	<!-- Route Builder -->
+	<bean id="testRouteBuilder" class="org.apache.camel.itests.phantom.TestRouteBuilder"/>
+	
+	<!-- DataSet -->
+	<bean id="simpleDataSet" class="org.apache.camel.component.dataset.SimpleDataSet">
+		<property name="size" value="100000" />
+	</bean>
+	
+</blueprint>

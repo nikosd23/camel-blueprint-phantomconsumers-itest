@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>camel-blueprint-phantomconsumers-itest</artifactId>
+		<groupId>org.apache.camel.itests</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>queue-commands</artifactId>
+	<packaging>bundle</packaging>
+	<name>Camel Integration Test - Karaf :: Camel Blueprint Phantom Consumers :: Queue Commands</name>
+		<properties>
+		<osgi.bundles />
+		<osgi.private />
+		<osgi.import>
+			!org.apache.camel.itests.commands*;version=${project.version},
+			org.apache.activemq.broker.jmx;version=${activemq.version},				
+			org.apache.activemq.web;version=${activemq.version},
+			org.apache.felix.service.command;version=0.6,
+			org.apache.felix.gogo.commands;version=0.6,
+			org.apache.karaf.shell.console;version=2.2,
+			*
+        </osgi.import>
+		<osgi.dynamic.import>
+			javax.*,
+			org.w3c.*,
+			org.xml.*,
+        </osgi.dynamic.import>
+		<osgi.export>
+			org.apache.camel.itests.commands*;version=${project.version},		
+		</osgi.export>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.karaf.shell</groupId>
+			<artifactId>org.apache.karaf.shell.console</artifactId>
+			<version>${karaf.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.apache.karaf</groupId>
+			<artifactId>org.apache.karaf.util</artifactId>
+			<version>${karaf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>			
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-web</artifactId>								
+		</dependency>
+	</dependencies>
+</project>

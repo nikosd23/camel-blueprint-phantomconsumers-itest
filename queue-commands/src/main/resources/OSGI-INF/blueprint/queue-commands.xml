@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" default-activation="lazy">
+
+    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+        <command name="queue/broker-info">
+            <action class="org.apache.camel.itests.commands.BrokerInfoCommand">
+                <property name="queueInfoService" ref="queueInfoService"/>
+            </action>
+        </command>        
+    </command-bundle>
+
+	<bean id="remoteJmxConfiguration" class="org.apache.camel.itests.commands.CustomWebConsoleConfiguration">
+		<property name="connectionFactory" ref="connectionFactory"/>
+		<property name="url" value="service:jmx:rmi:///jndi/rmi://localhost:11099/jmxrmi"/>
+	</bean>
+
+	<bean id="brokerFacade" class="org.apache.activemq.web.RemoteJMXBrokerFacade" destroy-method="shutdown">
+		<property name="configuration" ref="remoteJmxConfiguration"/>
+		<property name="brokerName"><null/></property>
+	</bean>
+
+    <bean id="queueInfoService" class="org.apache.camel.itests.commands.QueueInfoServiceImpl">
+        <property name="brokerFacade" ref="brokerFacade"/>
+    </bean>
+	
+	<reference id="connectionFactory" interface="javax.jms.ConnectionFactory"/>
+
+</blueprint>

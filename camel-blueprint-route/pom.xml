@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>camel-blueprint-phantomconsumers-itest</artifactId>
+		<groupId>org.apache.camel.itests</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>camel-blueprint-route</artifactId>
+	<name>Camel Integration Test - Karaf :: Camel Blueprint Phantom Consumers :: Camel Route</name>
+	<packaging>bundle</packaging>
+	
+	<properties>
+		<osgi.import>
+			!org.apache.camel.itests.phantom;version=${project.version},
+			org.apache.activemq*;version="[${activemq.version},6)",
+			org.apache.activemq.xbean;version="[${activemq.version},6)",
+			org.apache.activemq.broker;version="[${activemq.version},6)",
+			org.apache.activemq.broker.region.policy;version="[${activemq.version},6)",
+			org.apache.activemq.broker.jmx;version="[${activemq.version},6)",
+			org.apache.activemq.store.kahadb;version="[${activemq.version},6)",
+			org.apache.activemq.util;version="[${activemq.version},6)",
+			org.apache.camel*;version="[${camel.version},3)",
+			*
+			</osgi.import>
+		<osgi.dynamic.import>javax.*,org.w3c.*,org.xml.*</osgi.dynamic.import>
+		<osgi.export>
+			org.apache.camel.itests.phantom;version=${project.version},
+		</osgi.export>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-camel</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xbean</groupId>
+			<artifactId>xbean-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+	</dependencies>
+</project>
